@@ -4,18 +4,19 @@ import datetime
 import bs4
 
 
-def return_movies(curr_date=datetime.date.today()):
+def return_movies(required_date=datetime.date.today()):
     date = {
-        'year': curr_date.strftime('%Y'),
-        'month': curr_date.strftime('%m'),
-        'day': curr_date.strftime('%d')
+        'year': required_date.strftime('%Y'),
+        'month': required_date.strftime('%m'),
+        'day': required_date.strftime('%d')
     }
     params = {'date': '{}-{}-{}'.format(date['year'],
                                         date['month'],
                                         date['day'])}
-    classes = {'common': {'class': 'film-box-holder actual'},
+    classes = {'common': 'film-box-holder actual',
                'personal': 'film-box',
-               'title': 'film-title'}
+               'title': 'film-title',
+               'link': 'btn-buy'}
 
     r = requests.get(url=config.city_link,
                      params=params,
@@ -25,8 +26,11 @@ def return_movies(curr_date=datetime.date.today()):
         page.find('div', classes['common']).find_all('div',
                                                      classes['personal'])
     for i in range(len(only_films)):
-        only_films[i] = \
+        film_name = \
             only_films[i].find('a', classes['title']).find('span').get_text()
+        info_link = \
+            only_films[i].find('a', classes['link']).get("href")
+        only_films[i] = {film_name: info_link}
 
     return only_films
 
