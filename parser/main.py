@@ -17,8 +17,9 @@ def return_movies(required_date=datetime.date.today()):
                'personal': 'film-box',
                'title': 'film-title',
                'link': 'btn-buy'}
-    board_link = \
-        cfg.links_navigator.get('main') + cfg.links_navigator.get('board')
+    board_link = '{}{}'.format(
+        cfg.links_navigator.get('main'), cfg.links_navigator.get('board')
+    )
 
     r = requests.get(url=board_link,
                      params=params,
