@@ -44,7 +44,8 @@ def info_about(info_link):
     classes = {
         'description': {'element': 'div', 'class': 'film-description'},
         'title': {'element': 'h3', 'class': 'title'},
-        'translation': {'element': 'span', 'class': 'sub-title'}
+        'translation': {'element': 'span', 'class': 'sub-title'},
+        'image': {'element': 'div', 'class': 'img-holder'}
     }
 
     r = requests.get(info_link)
@@ -59,7 +60,12 @@ def info_about(info_link):
                       classes.get('description').get('class')
                       ).find(classes.get('translation').get('element'),
                              classes.get('translation').get('class')
-                             ).get_text()
+                             ).get_text(),
+        'img-link':
+            page.find(classes.get('description').get('element'),
+                      classes.get('description').get('class')).find(
+                classes.get('image').get('element'),
+                classes.get('image').get('class')).find('img').get('data-src')
     }
     return film_data
 
