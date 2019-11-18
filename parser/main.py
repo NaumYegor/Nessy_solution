@@ -2,6 +2,7 @@ import requests
 import config as cfg
 import datetime
 import bs4
+import keys
 
 
 def return_movies(required_date=datetime.date.today()):
@@ -18,7 +19,7 @@ def return_movies(required_date=datetime.date.today()):
                'title': 'film-title',
                'link': 'btn-buy'}
     board_link = '{}{}'.format(
-        cfg.links_navigator.get('main'), cfg.links_navigator.get('board')
+        cfg.links.get('main'), cfg.links.get('board')
     )
 
     r = requests.get(url=board_link,
@@ -32,7 +33,7 @@ def return_movies(required_date=datetime.date.today()):
         film_name = only_films[i].find('a', classes.get('title')
                                        ).find('span').get_text()
         info_link = '{}{}'.format(
-            cfg.links_navigator.get('main'),
+            cfg.links.get('main'),
             only_films[i].find('a', classes.get('link')).get('href'))
         only_films[i] = {film_name: info_link}
 
@@ -63,4 +64,10 @@ def info_about(info_link):
     return film_data
 
 
-print(info_about('https://m.vkino.ua/ru/show/8010-angeli-charli/kharkov?date=2019-11-18'))
+def get_mdb_info(name):
+    params = {
+        'apikey': keys.mdb_key,
+        't': name
+    }
+    r = requests.get(url=cfg.links.get('omdb'), params=params)
+    return r.json()
