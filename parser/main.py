@@ -29,15 +29,18 @@ def return_movies(required_date=datetime.date.today()):
     only_films = page.find('div', classes.get('common')
                            ).find_all('div',
                                       classes.get('personal'))
+
+    answer = dict()
+
     for i in range(len(only_films)):
         film_name = only_films[i].find('a', classes.get('title')
                                        ).find('span').get_text()
         info_link = '{}{}'.format(
             cfg.links.get('main'),
             only_films[i].find('a', classes.get('link')).get('href'))
-        only_films[i] = {film_name: info_link}
+        answer[film_name] = info_link
 
-    return only_films
+    return answer
 
 
 def info_about(info_link):
