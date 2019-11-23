@@ -1,6 +1,5 @@
-import null as null
 from flask import Flask
-import parser.main as man
+import parser as man
 import datetime
 import json
 
@@ -27,3 +26,7 @@ def general(date=datetime.date.today()):
 @app.route('/details', methods=['GET'])
 def details(name=None):
     return man.get_mdb_info(name)
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=False, port=3000)
