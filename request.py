@@ -1,6 +1,6 @@
 import null as null
 from flask import Flask
-import main as man
+import parser.main as man
 import datetime
 import json
 
