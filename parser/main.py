@@ -64,7 +64,7 @@ def info_about(info_link):
                       ).find(classes.get('translation').get('element'),
                              classes.get('translation').get('class')
                              ).get_text(),
-        'img-link':
+        'img_link':
             page.find(classes.get('description').get('element'),
                       classes.get('description').get('class')).find(
                 classes.get('image').get('element'),
