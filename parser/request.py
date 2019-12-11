@@ -4,7 +4,7 @@ import datetime
 import json
 
 app: Flask = Flask(__name__)
-info = {}
+info = []
 
 
 @app.route('/general', methods=['GET'])
@@ -15,7 +15,7 @@ def general(date=datetime.date.today()):
     data = man.return_movies(date)
     r = 0
     for k, v in data.items():
-        info[r] = (man.info_about(v))
+        info.append(man.info_about(v))
         s = (man.get_mdb_info(info[r].get('translation')))
         if s.get('imdbRating') == "N/A" or s.get('imdbRating') is None:
             info[r]['imdb'] = ''
