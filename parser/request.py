@@ -1,5 +1,5 @@
-from flask import Flask
-import parser as man
+from flask import Flask, request
+import main as man
 import datetime
 import json
 
@@ -9,6 +9,9 @@ info = {}
 
 @app.route('/general', methods=['GET'])
 def general(date=datetime.date.today()):
+    if request.values.get('date') is not None:
+        date = request.values.get('date')
+
     data = man.return_movies(date)
     r = 0
     for k, v in data.items():
@@ -24,7 +27,11 @@ def general(date=datetime.date.today()):
 
 
 @app.route('/details', methods=['GET'])
-def details(name=None):
+def details():
+    if request.values.get('name') is not None:
+        name = request.values.get('name')
+    else:
+        return "Name is none"
     return man.get_mdb_info(name)
 
 

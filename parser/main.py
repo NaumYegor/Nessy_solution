@@ -6,14 +6,12 @@ import keys
 
 
 def return_movies(required_date=datetime.date.today()):
-    date = {
+    """date = {
         'year': required_date.strftime('%Y'),
         'month': required_date.strftime('%m'),
         'day': required_date.strftime('%d')
-    }
-    params = {'date': '{}-{}-{}'.format(date.get('year'),
-                                        date.get('month'),
-                                        date.get('day'))}
+    }"""
+    params = {'date': required_date}
     classes = {'common': 'film-box-holder actual',
                'personal': 'film-box',
                'title': 'film-title',
@@ -74,6 +72,8 @@ def info_about(info_link):
 
 
 def get_mdb_info(name):
+    if name is None:
+        return 'Name is None'
     params = {
         'apikey': keys.mdb_key,
         't': name
