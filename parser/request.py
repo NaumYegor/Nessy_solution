@@ -18,7 +18,7 @@ def general(date=datetime.date.today()):
         info.append(man.info_about(v))
         s = (man.get_mdb_info(info[r].get('translation')))
         if s.get('imdbRating') == "N/A" or s.get('imdbRating') is None:
-            info[r]['imdb'] = ''
+            info[r]['imdb'] = 'No rating'
         else:
             info[r]['imdb'] = s.get('imdbRating')
         r = r + 1
