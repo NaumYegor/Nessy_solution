@@ -4,11 +4,11 @@ import datetime
 import json
 
 app: Flask = Flask(__name__)
-info = []
 
 
 @app.route('/general', methods=['GET'])
 def general(date=datetime.date.today()):
+    info = []
     if request.values.get('date') is not None:
         date = request.values.get('date')
 
