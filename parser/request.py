@@ -3,7 +3,7 @@ import main as man
 import datetime
 import json
 
-app: Flask = Flask(__name__)
+app =  Flask(__name__)
 
 
 @app.route('/general', methods=['GET'])
