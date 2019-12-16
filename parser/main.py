@@ -66,8 +66,11 @@ def info_about(info_link):
             page.find(classes.get('description').get('element'),
                       classes.get('description').get('class')).find(
                 classes.get('image').get('element'),
-                classes.get('image').get('class')).find('img').get('data-src')
+                classes.get('image').get(
+                    'class')).find(
+                'img').get('data-srcset').split(',')[1].split(' ')[1]
     }
+    print(film_data)
     return film_data
 
 
